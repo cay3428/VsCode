@@ -3,6 +3,8 @@ import { Product } from 'src/app/models/product';
 import { ProductResponseModel } from 'src/app/models/productResponseModel';
 import { HttpClient } from '@angular/common/http';
 import { ProductService } from 'src/app/services/product.service';
+import { ActivatedRoute } from '@angular/router';
+//import { timingSafeEqual } from 'crypto';
 
 
 @Component({
@@ -25,16 +27,34 @@ dataLoaded = false;
 
     };
  // constructor(private httpClient: HttpClient) { }
-  constructor(private productService:ProductService){}
+  constructor(private productService:ProductService,private activatedRoute:ActivatedRoute){}
 
   ngOnInit(): void {
+    
+    this.activatedRoute.params.subscribe(params=>{
+if(params["categoryId"]){
+  this.getProductByCategory(params["categoryId"])
+} else{
+  this.getProduct()
+}
+
+
+    })
 
     //console.log("inştçalıştı");
-this.getProduct();
+//this.getProduct();
 
   }
 
+getProductByCategory(categoryId:number){
+this.productService.getProductByCategory(categoryId).subscribe(response=>{
+  this.products=response.data
+  this.dataLoaded=true;
+})
 
+
+
+}
 
   getProduct() {
 // console.log("api request başladı")

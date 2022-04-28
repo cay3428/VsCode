@@ -18,16 +18,13 @@ export class ProductComponent implements OnInit {
 
   products: Product[] = [];
 dataLoaded = false;
-  
-  productsResponseModel:ProductResponseModel={
-      data : this.products,
-      message:"",
-      success:true
-       
+constructor(private productService:ProductService,
+  private activatedRoute:ActivatedRoute){}
 
-    };
+
+
+  
  // constructor(private httpClient: HttpClient) { }
-  constructor(private productService:ProductService,private activatedRoute:ActivatedRoute){}
 
   ngOnInit(): void {
     
@@ -42,9 +39,17 @@ if(params["categoryId"]){
     })
 
     //console.log("inştçalıştı");
-//this.getProduct();
+//this.getProduct(); 
 
   }
+  productsResponseModel:ProductResponseModel={
+    data : this.products,
+    message:"",
+    success:true
+     
+
+  };
+
 
 getProductByCategory(categoryId:number){
 this.productService.getProductByCategory(categoryId).subscribe(response=>{

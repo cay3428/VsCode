@@ -23,7 +23,7 @@ return   this.httpClient.get<ListResponseModel<Product>>(newPath);
     
 }
 getProductByCategory(categoryId:number):Observable<ListResponseModel<Product>>{
-  let newPath=this.apiUrl+"produtcs(getbycategory?categoryId="+categoryId
+  let newPath=this.apiUrl+"products/getbycategory?categoryId="+categoryId
   return this.httpClient.get<ListResponseModel<Product>>(newPath);
 }
 

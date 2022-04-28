@@ -74,6 +74,17 @@ this.dataLoaded=true;
 //    console.log("metod sona erdi");
 
     }
+
+addToCart(product:Product) {
+
+  console.log(product)
+
+}
+
+
+
+
+
   }
 
 

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/services/cart.service';
 //import { timingSafeEqual } from 'crypto';
 
 
@@ -22,7 +23,9 @@ dataLoaded = false;
 filterText="";
 
 constructor(private productService:ProductService,
-  private activatedRoute:ActivatedRoute,private toastrService:ToastrService){}
+  private activatedRoute:ActivatedRoute,
+  private toastrService:ToastrService,
+  private cartService:CartService){}
 
 
 
@@ -81,6 +84,8 @@ if(product.productId===1){
   this.toastrService.error("Hata bu ürün sepete eklenemez")
 }else{ 
   this.toastrService.success("Sepete eklendi",product.productName)
+this.cartService.addToCart(product);
+
 }
 
 
